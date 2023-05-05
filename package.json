@@ -1,0 +1,90 @@
+{
+    "name": "daochat-protocol",
+    "description": "A zero-knowledge protocol for anonymous signalling on Ethereum.",
+    "license": "MIT",
+    "repository": "git@github.com:daochat-protocol/daochat.git",
+    "homepage": "https://github.com/daochat-protocol/daochat",
+    "bugs": "https://github.com/daochat-protocol/daochat/issues",
+    "private": true,
+    "scripts": {
+        "build:libraries": "yarn workspaces foreach -t --no-private run build",
+        "compile:contracts": "yarn workspace contracts compile",
+        "download:snark-artifacts": "rimraf snark-artifacts && ts-node scripts/download-snark-artifacts.ts",
+        "remove:template-files": "ts-node scripts/remove-template-files.ts",
+        "test": "yarn test:libraries && yarn test:contracts",
+        "test:libraries": "jest --coverage",
+        "test:contracts": "yarn workspace contracts test:coverage",
+        "lint": "eslint . --ext .js,.ts && yarn workspace contracts lint",
+        "prettier": "prettier -c .",
+        "prettier:write": "prettier -w .",
+        "docs": "yarn workspaces foreach --no-private run docs",
+        "version:bump": "yarn workspaces foreach --no-private version -d ${0} && yarn version apply --all && git commit -am \"chore: v${0}\" && git tag v${0}",
+        "version:publish": "yarn build:libraries && yarn remove:template-files && yarn workspaces foreach --no-private npm publish --tolerate-republish --access public",
+        "version:release": "changelogithub",
+        "commit": "cz",
+        "precommit": "lint-staged",
+        "postinstall": "yarn download:snark-artifacts && husky install"
+    },
+    "keywords": [
+        "ethereum",
+        "daochat",
+        "solidity",
+        "circom",
+        "javascript",
+        "typescript",
+        "zero-knowledge",
+        "zk-snarks",
+        "zero-knowledge-proofs",
+        "proof-of-membership",
+        "monorepo"
+    ],
+    "workspaces": [
+        "packages/*",
+        "packages/contracts/contracts"
+    ],
+    "packageManager": "yarn@3.2.1",
+    "devDependencies": {
+        "@babel/core": "^7.16.7",
+        "@babel/preset-env": "^7.16.8",
+        "@babel/preset-typescript": "^7.17.12",
+        "@commitlint/cli": "^16.0.2",
+        "@commitlint/config-conventional": "^16.0.0",
+        "@rollup/plugin-typescript": "^8.3.0",
+        "@types/download": "^8.0.1",
+        "@types/glob": "^7.2.0",
+        "@types/jest": "^27.4.0",
+        "@types/node": "^17.0.9",
+        "@types/rimraf": "^3.0.2",
+        "@typescript-eslint/eslint-plugin": "^5.9.1",
+        "@typescript-eslint/parser": "^5.9.1",
+        "babel-jest": "^27.4.6",
+        "changelogithub": "0.12.7",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
+        "dotenv": "^16.0.2",
+        "eslint": "^8.2.0",
+        "eslint-config-airbnb-base": "15.0.0",
+        "eslint-config-airbnb-typescript": "^16.1.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-jest": "^25.7.0",
+        "husky": "^8.0.3",
+        "jest": "^27.4.1",
+        "jest-config": "^27.4.7",
+        "lint-staged": "^12.1.7",
+        "prettier": "^2.5.1",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.64.0",
+        "ts-node": "^10.4.0",
+        "tslib": "^2.3.1",
+        "typescript": "^4.7.0"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "resolutions": {
+        "changelogithub@0.12.7": "patch:changelogithub@npm:0.12.7#.yarn/patches/changelogithub-npm-0.12.7-72f348805d.patch"
+    }
+}

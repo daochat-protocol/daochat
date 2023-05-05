@@ -1,0 +1,59 @@
+{
+    "name": "@daochat-protocol/cli",
+    "type": "module",
+    "version": "3.9.0",
+    "description": "A command line tool to set up your daochat project and get group data.",
+    "license": "MIT",
+    "bin": {
+        "daochat": "dist/index.js"
+    },
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/",
+        "src/",
+        "LICENSE",
+        "README.md"
+    ],
+    "repository": "https://github.com/daochat-protocol/daochat",
+    "homepage": "https://github.com/daochat-protocol/daochat/tree/main/packages/cli",
+    "bugs": {
+        "url": "https://github.com/daochat-protocol/daochat.git/issues"
+    },
+    "engines": {
+        "node": ">=14.16"
+    },
+    "scripts": {
+        "start": "ts-node --esm src/index.ts",
+        "build:watch": "rollup -c rollup.config.ts -w --configPlugin typescript",
+        "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin typescript",
+        "prepublishOnly": "yarn build"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@types/clear": "^0.1.2",
+        "@types/figlet": "^1.5.5",
+        "@types/inquirer": "^9.0.3",
+        "@types/pacote": "^11.1.5",
+        "@types/semver": "^7.3.13",
+        "rollup-plugin-cleanup": "^3.2.1",
+        "rollup-plugin-typescript2": "^0.31.2",
+        "ts-node": "^10.9.1",
+        "typedoc": "^0.22.11"
+    },
+    "dependencies": {
+        "@daochat-protocol/data": "3.9.0",
+        "axios": "^1.3.2",
+        "boxen": "^7.0.1",
+        "chalk": "^5.1.2",
+        "commander": "^9.4.1",
+        "decompress": "^4.2.1",
+        "figlet": "^1.5.2",
+        "inquirer": "^9.1.4",
+        "log-symbols": "^5.1.0",
+        "ora": "^6.1.2",
+        "pacote": "^15.1.1",
+        "semver": "^7.3.8"
+    }
+}

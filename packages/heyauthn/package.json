@@ -1,0 +1,42 @@
+{
+    "name": "@Daochat-protocol/heyauthn",
+    "version": "3.9.0",
+    "description": "A library to allow developers to create and manage Daochat identities using WebAuthn",
+    "license": "MIT",
+    "main": "dist/index.node.js",
+    "exports": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.node.js"
+    },
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/",
+        "src/",
+        "LICENSE",
+        "README.md"
+    ],
+    "repository": "https://github.com/daochat-protocol/daochat",
+    "homepage": "https://github.com/daochat-protocol/daochat/tree/main/packages/heyauthn",
+    "bugs": {
+        "url": "https://github.com/daochat-protocol/daochat.git/issues"
+    },
+    "scripts": {
+        "build:watch": "rollup -c rollup.config.ts -w --configPlugin typescript",
+        "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin typescript",
+        "prepublishOnly": "yarn build",
+        "docs": "typedoc src/index.ts --out ../../docs/heyauthn"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "rollup-plugin-cleanup": "^3.2.1",
+        "rollup-plugin-typescript2": "^0.31.2",
+        "typedoc": "^0.22.11"
+    },
+    "dependencies": {
+        "@daochat-protocol/identity": "3.9.0",
+        "@simplewebauthn/browser": "7.2.0",
+        "@simplewebauthn/server": "7.2.0"
+    }
+}

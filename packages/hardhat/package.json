@@ -1,0 +1,46 @@
+{
+    "name": "@daochat-protocol/hardhat",
+    "version": "3.9.0",
+    "description": "A Daochat Hardhat plugin to deploy verifiers and Daochat contract.",
+    "license": "MIT",
+    "main": "dist/index.node.js",
+    "exports": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.node.js"
+    },
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/",
+        "src/",
+        "LICENSE",
+        "README.md"
+    ],
+    "repository": "https://github.com/daochat-protocol/daochat",
+    "homepage": "https://github.com/daochat-protocol/daochat/tree/main/packages/hardhat",
+    "bugs": {
+        "url": "https://github.com/daochat-protocol/daochat.git/issues"
+    },
+    "scripts": {
+        "build:watch": "rollup -c rollup.config.ts -w --configPlugin typescript",
+        "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin typescript",
+        "prepublishOnly": "yarn build"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "hardhat": "^2.0.0",
+        "rollup-plugin-cleanup": "^3.2.1",
+        "rollup-plugin-typescript2": "^0.31.2"
+    },
+    "peerDependencies": {
+        "hardhat": "^2.0.0"
+    },
+    "dependencies": {
+        "@daochat-protocol/contracts": "3.9.0",
+        "@nomiclabs/hardhat-ethers": "^2.1.1",
+        "circomlibjs": "^0.0.8",
+        "ethers": "^5.7.1",
+        "hardhat-dependency-compiler": "^1.1.3"
+    }
+}
